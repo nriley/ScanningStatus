@@ -120,16 +120,21 @@ static void SSFocusedWindowChanged(AXObserverRef observer, AXUIElementRef elemen
 
 - (void)setApplication:(NSRunningApplication *)application;
 {
-	if (focusedWindow != NULL)
+	if (focusedWindow != NULL) {
 		CFRelease(focusedWindow);
+		focusedWindow = NULL;
+	}
 	
 	if (observer != NULL) {
 		CFRunLoopRemoveSource(CFRunLoopGetCurrent(), AXObserverGetRunLoopSource(observer), kCFRunLoopDefaultMode);
 		CFRelease(observer);
+		observer = NULL;
 	}
 		
-	if (applicationElement != NULL)
+	if (applicationElement != NULL) {
 		CFRelease(applicationElement);
+		applicationElement = NULL;
+	}
 	
 	if (!application)
 		return;
