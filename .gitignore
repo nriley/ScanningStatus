@@ -1,0 +1,10 @@
+# Xcode
+*.pbxuser
+*.mode2*
+build/
+
+# DesktopServices
+.DS_Store
+
+# Scanning Status
+~ Samples
