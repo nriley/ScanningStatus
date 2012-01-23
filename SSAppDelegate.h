@@ -33,6 +33,7 @@
 - (void)watchedFolderListChanged;
 
 - (IBAction)togglePreviewPanel:(id)sender;
+- (IBAction)open:(id)sender;
 - (IBAction)reveal:(id)sender;
 
 @end

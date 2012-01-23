@@ -123,10 +123,10 @@
 		[menuItem setTitle:@"Quick Look"];
 		return ([outlineView numberOfSelectedRows] > 0);
 	}
-	
-	if (action == @selector(reveal:))
-		return ([outlineView numberOfSelectedRows] > 0);
-	
+
+	if (action == @selector(reveal:) || action == @selector(open:))
+		return ([outlineView numberOfSelectedRows] > 0 || [outlineView clickedRow] != -1);
+
 	if (action == @selector(delete:)) {
 		// note: [treeView selectedObjects] does not reset for empty selection
 		if ([outlineView numberOfSelectedRows] == 0)
@@ -191,6 +191,11 @@
         [sharedPreviewPanel orderOut:nil];
     else
         [sharedPreviewPanel makeKeyAndOrderFront:nil];
+}
+
+- (IBAction)open:(id)sender;
+{
+	[[NSWorkspace sharedWorkspace] openURLs:[self selectedURLs] withAppBundleIdentifier:nil options:NSWorkspaceLaunchAsync additionalEventParamDescriptor:nil launchIdentifiers:NULL];
 }
 
 - (IBAction)reveal:(id)sender;

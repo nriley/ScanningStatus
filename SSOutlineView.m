@@ -33,4 +33,13 @@
 	[super keyDown:theEvent];
 }
 
+- (NSMenu *)menuForEvent:(NSEvent *)theEvent;
+{
+    NSInteger row = [self rowAtPoint:[self convertPoint:[theEvent locationInWindow] fromView:nil]];
+	if (row != -1)
+		return [super menuForEvent:theEvent];
+
+	return nil;
+}
+
 @end
