@@ -103,11 +103,12 @@
 	NSString *path;
 	for (SSWatchedFolder *watchedFolder in watchedFolders) {
 		path = [pathEnumerator nextObject];
+		if (path == nil)
+			continue;
 		NSMapInsert(pathToWatchedFolder, path, watchedFolder);
 	}
-	
-	NSLog(@"watching paths: %@", pathsToWatch);
-	[pathWatcher startWatchingPaths:pathsToWatch];
+
+	[pathWatcher startWatchingPaths:[pathsToWatch filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF != nil"]]];
 }
 
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem;
