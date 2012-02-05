@@ -73,7 +73,15 @@
 
 - (NSArray *)selectedURLs;
 {
-	return [[treeController selectedObjects] valueForKey:SSTreeNodeAttributes.fileReferenceURL];
+    NSInteger clickedRow = [outlineView clickedRow];
+    NSArray *selectedObjects;
+	
+    if (clickedRow == -1 || [[outlineView selectedRowIndexes] containsIndex:clickedRow])
+        selectedObjects = [treeController selectedObjects];
+    else
+        selectedObjects = [NSArray arrayWithObject:[[outlineView itemAtRow:clickedRow] representedObject]];
+	
+    return [selectedObjects valueForKey:SSTreeNodeAttributes.fileReferenceURL];
 }
 
 - (void)watchedFolderListChanged;
